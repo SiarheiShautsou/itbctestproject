@@ -23,10 +23,9 @@ public class UserRepositoryImpl implements UserRepositoryInterface{
 
         try(EntityManager entityManager = entityManagerFactory.createEntityManager()){
 
-            userById = entityManager.createQuery("select u from User u where u.id = id", User.class).getSingleResult();
+            userById = entityManager.find(User.class, id);
 
         }
-
         return Optional.of(userById);
     }
 
@@ -40,5 +39,42 @@ public class UserRepositoryImpl implements UserRepositoryInterface{
             users = entityManager.createQuery("select u from User u", User.class).getResultList();
         }
         return users;
+    }
+
+    @Override
+    public void saveUser(User user) {
+
+        try(EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+
+            entityManager.persist(user);
+        }
+    }
+
+    @Override
+    public void updateUserInfo(User user) {
+
+        try(EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+
+            User persistUser = entityManager.find(User.class, user.getId());
+
+            persistUser.setLastName(user.getLastName());
+            persistUser.setName(user.getName());
+            persistUser.setPatronymic(user.getPatronymic());
+            persistUser.setEmail(user.getEmail());
+            persistUser.setRole(user.getRole());
+
+            entityManager.getTransaction().commit();
+
+        }
+
+    }
+
+    @Override
+    public void deleteUser(User user) {
+
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+
+            entityManager.remove(user);
+        }
     }
 }

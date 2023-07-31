@@ -12,5 +12,11 @@ public interface UserRepositoryInterface {
 
     List<User> findAll();
 
+    void saveUser(User user);
+
+    void updateUserInfo(User user);
+
+    void deleteUser(User user);
+
 
 }
