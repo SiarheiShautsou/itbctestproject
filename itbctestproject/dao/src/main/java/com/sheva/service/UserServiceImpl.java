@@ -1,15 +1,18 @@
 package com.sheva.service;
 
 import com.sheva.domain.User;
-import com.sheva.exception.NoSuchEntityException;
+import com.sheva.exception.CommonException;
+import com.sheva.repository.UserRepositoryImpl;
 import com.sheva.repository.UserRepositoryInterface;
 import com.sheva.util.UUIDGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserServiceInterface {
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserServiceInterface {
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else
-            throw new NoSuchEntityException(String.format("User with id = %d not found", id),
+            throw new CommonException(String.format("User with id = %d not found", id),
                     404,
                     UUIDGenerator.generateUUID());
 

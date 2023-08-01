@@ -2,7 +2,7 @@ package com.sheva.service;
 
 import com.sheva.domain.Role;
 import com.sheva.domain.SystemRole;
-import com.sheva.exception.NoSuchEntityException;
+import com.sheva.exception.CommonException;
 import com.sheva.repository.RoleRepositoryInterface;
 import com.sheva.util.UUIDGenerator;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleServiceInterface{
         if (role != null){
             return roleRepository.findRoleByName(uc);
         }else
-            throw new NoSuchEntityException(String.format("Role %s isn't exist", name),
+            throw new CommonException(String.format("Role %s isn't exist", name),
                     404,
                     UUIDGenerator.generateUUID());
 
