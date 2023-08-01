@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepositoryInterface {
 
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
 
-            users = entityManager.createQuery("select u from User u", User.class).getResultList();
+            users = entityManager.createQuery("select u from User u order by email", User.class).getResultList();
         }
         return users;
     }

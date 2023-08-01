@@ -1,13 +1,14 @@
 create table if not exists role
 (
-    id        int auto_increment
+    id        int auto_increment,
+    role_name varchar(20) not null
         primary key,
-    role_name varchar(20) not null,
     constraint id
         unique (id),
     constraint role_name
         unique (role_name)
 );
+
 
 create table if not exists user
 (

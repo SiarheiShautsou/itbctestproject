@@ -31,8 +31,7 @@ public class Role {
     private Integer id;
 
     @Column(name = "role_name")
-    @Enumerated(EnumType.STRING)
-    private SystemRole role;
+    private String roleName;
 
     @OneToMany
     @ToString.Exclude

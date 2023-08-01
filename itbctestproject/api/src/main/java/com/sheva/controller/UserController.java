@@ -6,17 +6,16 @@ import com.sheva.domain.User;
 import com.sheva.service.UserServiceInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<Page<UserResponse>> findAllUsers() {
+    public ResponseEntity<List<UserResponse>> findAllUsers() {
 
         List<User> users = userService.searchUsers();
         List<UserResponse> responseUsers = new ArrayList<>();
@@ -52,15 +51,11 @@ public class UserController {
             responseUsers.add(converter.convert(user, UserResponse.class));
         }
 
-        Page<UserResponse> responsePage = new PageImpl<>(responseUsers);
-
-        return new ResponseEntity<>(responsePage, HttpStatus.OK);
+        return new ResponseEntity<>(responseUsers, HttpStatus.OK);
     }
 
     @PostMapping
-    public void createNewUser(UserCreateRequest request) {
-
-//        validationUtils.validationRequest(request);
+    public void createNewUser(@Valid @RequestBody UserCreateRequest request) {
 
         User user = converter.convert(request, User.class);
 

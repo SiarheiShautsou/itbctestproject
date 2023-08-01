@@ -3,7 +3,9 @@ package com.sheva.repository;
 import com.sheva.domain.Role;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,7 +22,9 @@ public class RoleRepositoryImpl implements RoleRepositoryInterface {
 
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
 
-            role = entityManager.find(Role.class, name);
+            TypedQuery<Role> query = entityManager.createQuery("select r from Role r where roleName = :param", Role.class);
+            query.setParameter("param", name);
+            role = query.getSingleResult();
 
         }
 

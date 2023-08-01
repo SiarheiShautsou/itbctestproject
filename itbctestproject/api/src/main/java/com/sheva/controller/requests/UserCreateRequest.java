@@ -1,8 +1,8 @@
 package com.sheva.controller.requests;
 
 import lombok.Data;
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBlank;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -26,7 +26,7 @@ public class UserCreateRequest {
     private String userEmail;
 
     @NotBlank(message = "Role must be filled")
-    @Pattern(regexp = "^[a-zA-Z0-9]{1,40}", message = "Role must be ADMINISTRATOR, SALE_USER, CUSTOMER_USER or SECURE_API_USER")
+//    @Pattern(regexp = "^[a-zA-Z0-9]{1,40}", message = "Role must be ADMINISTRATOR, SALE_USER, CUSTOMER_USER or SECURE_API_USER")
     private String userRole;
 
 }

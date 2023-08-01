@@ -15,7 +15,7 @@ public class UserResponseConverter implements Converter<User, UserResponse> {
         String username = source.getLastName() + " " + source.getName() + " " + source.getPatronymic();
         response.setUserName(username);
         response.setEmail(source.getEmail());
-        response.setRole(source.getRole().getRole().name());
+        response.setRole(source.getRole().getRoleName());
 
         return response;
     }

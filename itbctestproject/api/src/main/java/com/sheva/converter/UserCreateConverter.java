@@ -3,6 +3,7 @@ package com.sheva.converter;
 import com.sheva.controller.requests.UserCreateRequest;
 import com.sheva.domain.User;
 import com.sheva.repository.RoleRepositoryInterface;
+import com.sheva.service.RoleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class UserCreateConverter implements Converter<UserCreateRequest, User> {
 
-    private final RoleRepositoryInterface roleRepository;
+    private final RoleServiceImpl roleService;
 
     @Override
     public User convert(UserCreateRequest source) {
@@ -25,7 +26,7 @@ public class UserCreateConverter implements Converter<UserCreateRequest, User> {
         user.setName(source.getUserName());
         user.setPatronymic(source.getUserPatronymic());
         user.setEmail(source.getUserEmail());
-        user.setRole(roleRepository.findRoleByName(source.getUserRole()));
+        user.setRole(roleService.getRoleByName(source.getUserRole()));
         user.setCreationDate(new Timestamp(new Date().getTime()));
         user.setModificationDate(new Timestamp(new Date().getTime()));
 
