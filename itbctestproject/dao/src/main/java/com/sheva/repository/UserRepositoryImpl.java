@@ -13,15 +13,16 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 @Primary
-public class UserRepositoryImpl implements UserRepositoryInterface{
+public class UserRepositoryImpl implements UserRepositoryInterface {
 
     private final EntityManagerFactory entityManagerFactory;
+
     @Override
     public Optional<User> findById(Integer id) {
 
         User userById;
 
-        try(EntityManager entityManager = entityManagerFactory.createEntityManager()){
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
 
             userById = entityManager.find(User.class, id);
 
@@ -44,7 +45,7 @@ public class UserRepositoryImpl implements UserRepositoryInterface{
     @Override
     public void saveUser(User user) {
 
-        try(EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
 
             entityManager.persist(user);
         }
@@ -53,7 +54,7 @@ public class UserRepositoryImpl implements UserRepositoryInterface{
     @Override
     public void updateUserInfo(User user) {
 
-        try(EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
 
             User persistUser = entityManager.find(User.class, user.getId());
 

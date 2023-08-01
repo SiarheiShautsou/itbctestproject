@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RoleServiceImpl implements RoleServiceInterface{
+public class RoleServiceImpl implements RoleServiceInterface {
 
     private final RoleRepositoryInterface roleRepository;
 
@@ -27,9 +27,9 @@ public class RoleServiceImpl implements RoleServiceInterface{
             case SECURE_API_USER -> role = SystemRole.SECURE_API_USER;
         }
 
-        if (role != null){
+        if (role != null) {
             return roleRepository.findRoleByName(uc);
-        }else
+        } else
             throw new CommonException(String.format("Role %s isn't exist", name),
                     404,
                     UUIDGenerator.generateUUID());

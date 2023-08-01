@@ -1,6 +1,5 @@
 package com.sheva.repository;
 
-import com.sheva.domain.SystemRole;
 import com.sheva.domain.User;
 
 import java.util.List;

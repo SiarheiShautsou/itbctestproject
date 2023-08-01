@@ -2,7 +2,6 @@ package com.sheva.service;
 
 import com.sheva.domain.User;
 import com.sheva.exception.CommonException;
-import com.sheva.repository.UserRepositoryImpl;
 import com.sheva.repository.UserRepositoryInterface;
 import com.sheva.util.UUIDGenerator;
 import lombok.RequiredArgsConstructor;
